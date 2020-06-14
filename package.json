@@ -48,6 +48,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
     "node": "^14.4.0",
+    "normalize.css": "^8.0.1",
     "npm": "^6.14.5",
     "stable": "^0.1.8"
   }

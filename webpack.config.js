@@ -6,14 +6,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
+
+const filename = (ext) => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
+
 const jsLoaders = () => {
   const loaders = [
     {
-      loader: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-        },
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env'],
       },
     },
   ];
@@ -24,10 +25,8 @@ const jsLoaders = () => {
   return loaders
 };
 
-const filename = (ext) => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
-
-console.log(isProd);
-console.log(isDev);
+console.log('Production? ' + isProd);
+console.log('Development? ' + isDev);
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -40,8 +39,8 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     alias: {
-      '@': path.resolve((__dirname, 'src')),
-      '@core': path.resolve((__dirname, 'src/core')),
+      '@': path.resolve(__dirname, 'src'),
+      '@core': path.resolve(__dirname, 'src/core'),
     },
   },
   devtool: isDev ? 'source-map' : false,
