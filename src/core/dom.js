@@ -19,8 +19,12 @@ class Dom {
     return this
   }
 
-  on() {
+  on(eventType, callback) {
+    this.$el.addEventListener(eventType, callback)
+  }
 
+  del(eventType, callback) {
+    this.$el.removeEventListener(eventType, callback)
   }
 
   // Element in JS
