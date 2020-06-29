@@ -3,33 +3,35 @@ const CODES = {
   Z: 90
 };
 
-// function createCell() {
-//   return `
-//     <div class="cell" contenteditable></div>
-//   `;
-// }
-
-function toColumn(col) {
+function toColumn(col, index) {
   return `
-    <div class="column">${col}</div>
+    <div class="column" data-type="resizeable" data-col="${index}">
+    ${col}
+    <div class="col-resize" data-resize="col"></div>
+    </div>
   `;
 }
 
-function toCell(cell) {
+function toCell(_, col) {
   return `
-    <div class="cell" contenteditable>${cell}</div>
+    <div class="cell" contenteditable data-col="${col}"></div>
   `
 }
 
 function createRow(content, num) {
+  const resized = num ?
+    // eslint-disable-next-line max-len
+    `<div class="row-resize" data-resize="row"></div>` :
+    ''
   return `
-  <div class="row">
+  <div class="row" data-type="resizeable" data-row="${num}">
     <div class="row-info">
     ${num}
+    ${resized}
     </div>
     <div class="row-data">${content}</div>
   </div>
-`;
+`
 }
 
 function toChar(_, index) {
